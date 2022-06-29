@@ -6,7 +6,8 @@ using UnityEngine;
 public class Movement : MonoBehaviour
 {
 
-    Rigidbody rb = new Rigidbody();
+    Rigidbody rb;
+    AudioSource audioSource;
     [SerializeField] float mainThrust = 1000f;
     [SerializeField] float rotationThrust = 100f;
     
@@ -16,6 +17,7 @@ public class Movement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -34,9 +36,19 @@ public class Movement : MonoBehaviour
             //Vector3 is 3 values of vectors (x, y, z)
             rb.AddRelativeForce(Vector3.up * mainThrust * Time.deltaTime) ;
 
-            
 
+            //Audio
+            if (audioSource.isPlaying == false)
+            {
+                audioSource.Play();
+            }
         }
+        else
+        {
+            audioSource.Stop();
+        }
+
+
 
     }
 
@@ -62,4 +74,8 @@ public class Movement : MonoBehaviour
         transform.Rotate(Vector3.forward * rotationThisFrame * Time.deltaTime);
         rb.freezeRotation = false; //Unfreezing rotation so that physics system can take over.
     }
+
+
+
+
 } 
