@@ -9,7 +9,7 @@ public class Movement : MonoBehaviour
     Rigidbody rb;
     AudioSource audioSource;
     [SerializeField] float mainThrust = 1000f;
-    [SerializeField] float rotationThrust = 100f;
+    [SerializeField] float rotationThrust = 50f;
     
 
 
