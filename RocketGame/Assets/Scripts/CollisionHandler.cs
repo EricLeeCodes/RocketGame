@@ -4,13 +4,27 @@ using UnityEngine.SceneManagement;
 public class CollisionHandler : MonoBehaviour
 {
 
+    [SerializeField] float delayTime = 1f;
+    [SerializeField] AudioClip crashSound;
+    [SerializeField] AudioClip successSound;
 
+    AudioSource audioSource;
+
+    bool isTransitioning = false;
+
+    void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
 
         string collides = collision.gameObject.tag;
 
+        //If isTransitioning, don't continue to the switch statement.
+        if (isTransitioning == true) { return; }
 
         switch (collides)
         {
@@ -21,14 +35,32 @@ public class CollisionHandler : MonoBehaviour
                 Debug.Log("You've gained more fuel!");
                 break;
             case "Finish":
-                NextLevel();
+                StartingNextSequence();
                 break;
             default:
-                ReloadLevel();
+                StartCrashSequence();
                 break;
         }
     }
 
+
+    void StartCrashSequence()
+    {
+        isTransitioning = true;
+        audioSource.Stop();
+        audioSource.PlayOneShot(crashSound);
+        Invoke("ReloadLevel", delayTime);
+        GetComponent<Movement>().enabled = false;
+    }
+
+    void StartingNextSequence()
+    {
+        isTransitioning = true;
+        audioSource.Stop();
+        audioSource.PlayOneShot(successSound);
+        Invoke("LoadNextLevel", delayTime);
+        GetComponent<Movement>().enabled = false;
+    }
 
 
     void ReloadLevel()
@@ -37,7 +69,7 @@ public class CollisionHandler : MonoBehaviour
         SceneManager.LoadScene(currentScene);
         Debug.Log("You've hit the ground and exploded!");
     }
-    void NextLevel()
+    void LoadNextLevel()
     {
         Debug.Log("You've finished this level!!");
         int currentScene = SceneManager.GetActiveScene().buildIndex;
@@ -48,6 +80,9 @@ public class CollisionHandler : MonoBehaviour
             nextSceneIndex = 0;
         }
         SceneManager.LoadScene(nextSceneIndex);
+
     }
+
+
 
 }
