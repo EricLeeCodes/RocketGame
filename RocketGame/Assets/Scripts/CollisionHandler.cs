@@ -21,7 +21,7 @@ public class CollisionHandler : MonoBehaviour
                 Debug.Log("You've gained more fuel!");
                 break;
             case "Finish":
-                Debug.Log("You've finished the game!!");
+                NextLevel();
                 break;
             default:
                 ReloadLevel();
@@ -36,6 +36,18 @@ public class CollisionHandler : MonoBehaviour
         int currentScene = SceneManager.GetActiveScene().buildIndex;
         SceneManager.LoadScene(currentScene);
         Debug.Log("You've hit the ground and exploded!");
+    }
+    void NextLevel()
+    {
+        Debug.Log("You've finished this level!!");
+        int currentScene = SceneManager.GetActiveScene().buildIndex;
+        int nextSceneIndex = currentScene + 1;
+        //If the next scene is equal to the last Scene Count, load back the first level.
+        if (nextSceneIndex == SceneManager.sceneCountInBuildSettings)
+        {
+            nextSceneIndex = 0;
+        }
+        SceneManager.LoadScene(nextSceneIndex);
     }
 
 }
