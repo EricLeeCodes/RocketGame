@@ -548,22 +548,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 744136739, guid: 3d55d6a3393618b43afb69b355300e7d, type: 3}
-      propertyPath: mainEngine
-      value: 
-      objectReference: {fileID: 8300000, guid: a418329b222b8fa44b4c21b9fc6682dd, type: 3}
-    - target: {fileID: 1068082255, guid: 3d55d6a3393618b43afb69b355300e7d, type: 3}
-      propertyPath: delayTime
-      value: 1
+    - target: {fileID: 744136740, guid: 3d55d6a3393618b43afb69b355300e7d, type: 3}
+      propertyPath: m_Constraints
+      value: 56
       objectReference: {fileID: 0}
-    - target: {fileID: 1068082255, guid: 3d55d6a3393618b43afb69b355300e7d, type: 3}
-      propertyPath: crashSound
-      value: 
-      objectReference: {fileID: 8300000, guid: 34901efb68660364a9f18b383f80f5cc, type: 3}
-    - target: {fileID: 1068082255, guid: 3d55d6a3393618b43afb69b355300e7d, type: 3}
-      propertyPath: successSound
-      value: 
-      objectReference: {fileID: 8300000, guid: 5d2c823d43a6b5240ad1318ed160fc17, type: 3}
     - target: {fileID: 7205714938149604414, guid: 3d55d6a3393618b43afb69b355300e7d, type: 3}
       propertyPath: m_RootOrder
       value: 6
